@@ -1,0 +1,39 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudContainer Style="min-width: 1000px">
+            <MudTextField @bind-Value="Code" Lines="40" Label="Script" Variant="Variant.Text" ReadOnly />
+            <br />
+        </MudContainer>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    Thread looping = null;
+    string Code = "";
+
+    void Close() => MudDialog.Close(DialogResult.Ok(true));
+    protected override async Task OnInitializedAsync()
+    {
+        if (looping == null)
+        {
+            looping = new Thread(async () =>
+        {
+            while (true)
+            {
+                Code = Master.Singleton.scriptFile.GetText();
+                await InvokeAsync(StateHasChanged);
+                await Task.Delay(1000);
+            }
+        });
+            looping.Start();
+        }
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+       
+    }
+}

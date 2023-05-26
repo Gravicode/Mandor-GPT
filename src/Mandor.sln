@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33027.239
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mandor.AI", "Mandor.AI\Mandor.AI.csproj", "{F0ED080C-57C8-4E41-BDAF-E2671B0993C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mandor.Web", "Mandor.Web\Mandor.Web.csproj", "{743C9573-43BD-4468-BA87-493552A9AE42}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0ED080C-57C8-4E41-BDAF-E2671B0993C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0ED080C-57C8-4E41-BDAF-E2671B0993C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0ED080C-57C8-4E41-BDAF-E2671B0993C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0ED080C-57C8-4E41-BDAF-E2671B0993C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{743C9573-43BD-4468-BA87-493552A9AE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{743C9573-43BD-4468-BA87-493552A9AE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{743C9573-43BD-4468-BA87-493552A9AE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{743C9573-43BD-4468-BA87-493552A9AE42}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14F9A2CC-095D-46A0-8994-A2A88E7BD144}
+	EndGlobalSection
+EndGlobal
