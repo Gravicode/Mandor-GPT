@@ -7,6 +7,18 @@
 />
 
 @code {
+    Thread looping = null;
+    protected override async Task OnInitializedAsync() {
+        if (looping == null) {
+            looping = new Thread(async () => {
+                    while (true) {
+                        await Task.Delay(1000);
+                        await InvokeAsync(StateHasChanged);
+                    }
+                });
+            looping.Start();
+        }
+    }
     protected override void OnAfterRender(bool firstRender)
     {
         if (!Settings.OpenAIApiKey.StartsWith("sk-") && !Master.Singleton.Done)
@@ -17,15 +29,6 @@
         
         if (!firstRender)
             return;
-
-        Task.Run(async () =>
-        {
-            while (true)
-            {
-                await Task.Delay(1000);
-                StateHasChanged();
-            }
-        });
     }
 
     private void Click()

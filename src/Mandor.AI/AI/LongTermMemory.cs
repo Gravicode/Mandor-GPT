@@ -41,7 +41,7 @@ namespace Mandor.AI
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"make memory error - {ex}");
+                Logger.WriteLine($"make memory error - {ex}");
                 throw;
             }
           

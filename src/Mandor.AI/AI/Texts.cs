@@ -23,7 +23,7 @@
             "The memory should be up to 100 words long, but can be shorter\n" +
             "The memory should be in a form of a fact that the AI can understand without any additional context\n" +
             "With the memory you also need to provide between 10 to 40 tags that will help search for it later\n" +
-            "There is a list of tags you can use, but you can also create new ones if none of them are aplicable\n" +
+            "There is a list of tags you can use, but you can also create new ones if none of them are applicable\n" +
             "The tags should be relevant to the memory so the AI can later remember it by them\n" +
             "");
 

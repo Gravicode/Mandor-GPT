@@ -1,0 +1,62 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudContainer Style="min-width: 1000px">
+            <MudTable Items="@Notes" FixedHeader="@fixed_header" Height="@(fixed_header ?"400px":"")">
+                <HeaderContent>
+                    <MudTh>Notes</MudTh>
+                  
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Note">@context.Note</MudTd>
+                   
+                </RowTemplate>
+              
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+                </PagerContent>
+            </MudTable>
+
+            <MudSwitch @bind-Checked="@fixed_header">Fixed Header</MudSwitch>
+            
+            
+        </MudContainer>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    bool fixed_header = true;
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    Thread looping = null;
+    string Code = "";
+
+    void Close() => MudDialog.Close(DialogResult.Ok(true));
+
+    private List<NoteRecord> Notes = new List<NoteRecord>();
+    void Refresh() {
+        Notes.Clear();
+        foreach (var item in Master.Singleton.FormatedNotes.Split("\n")) {
+            Notes.Add(new NoteRecord(item));
+        }
+    }
+    protected override async Task OnInitializedAsync() {
+        if (looping == null) {
+            looping = new Thread(async () => {
+                while (true) {                    
+                    await Task.Delay(1000);
+                    Refresh();
+                    await InvokeAsync(StateHasChanged);
+                }
+            });
+            looping.Start();
+        }
+    }
+  
+    protected override void OnAfterRender(bool firstRender) {
+        if (!firstRender)
+            return;
+    }
+
+    public record NoteRecord(string Note);
+}

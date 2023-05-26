@@ -5,29 +5,25 @@
 
 @code {
     Thread looping = null;
-
-    protected override void OnAfterRender(bool firstRender)
-    {
+    protected override async Task OnAfterRenderAsync(bool firstRender) {
         if (!firstRender)
             return;
 
         //JS.InvokeVoidAsync("console.log", "hewo");
-        JS.InvokeVoidAsync("inicGraph");
-        if (looping == null)
-        {
-            looping = new Thread(async () =>
-        {
-            while (true)
-            {
-                await Task.Delay(1000);
-                await JS.InvokeVoidAsync("resizeGraph");
+        await JS.InvokeVoidAsync("inicGraph");
+        if (looping == null) {
+            looping = new Thread(async () => {
+                while (true) {
+                    await Task.Delay(1000);
+                    await JS.InvokeVoidAsync("resizeGraph");
 
-                if (Master.Singleton.Memory.MemoryChanged)
-                    await JS.InvokeVoidAsync("setGraphData", Master.Singleton.Memory.GetGraphData());
-            }
-        });
+                    if (Master.Singleton.Memory.MemoryChanged)
+                        await JS.InvokeVoidAsync("setGraphData", Master.Singleton.Memory.GetGraphData());
+                }
+            });
             looping.Start();
         }
-
     }
+    }
+    
 }

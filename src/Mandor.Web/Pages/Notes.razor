@@ -1,41 +1,15 @@
-﻿<MudIconButton Icon="@Icons.Material.Outlined.TextSnippet" OnClick="() => { showNotes = !showNotes; }" />
-@if (showNotes)
-{
-    <MudPaper Style="max-width: 300px; max-height: 500px; overflow-y: scroll;">
-        @foreach (var note in Master.Singleton.FormatedNotes.Split("\n"))
-        {
-            <p>@note</p>
-        }
-    </MudPaper>
-}
+﻿@inject IDialogService DialogService
+<MudIconButton Icon="@Icons.Material.Outlined.TextSnippet" OnClick="OpenWindow" />
 
 @code {
-    private bool showNotes = true;
-}
-
-@code {
-    Thread looping = null;
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (looping == null)
-        {
-            looping = new Thread(async () =>
-        {
-            while (true)
-            {
-                await Task.Delay(1000);
-                await InvokeAsync(StateHasChanged);
-            }
-        });
-            looping.Start();
-        }
+    
+    private void OpenWindow() {
+        DialogService.Show<NotesWindow>("Notes Window", new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge });
     }
+   
     protected override void OnAfterRender(bool firstRender)
     {
         if (!firstRender)
             return;
-
-      
     }
 }
